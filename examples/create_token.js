@@ -1,18 +1,18 @@
 'use strict';
 
 var omise = require('../index')({
-  'publicKey': 'pkey_test_58uputp2pjvubug0rza',
-  'secretKey': 'skey_test_58uputp2xdsnktje7u4',
+  'publicKey': process.env.OMISE_PUBLIC_KEY,
+  'secretKey': process.env.OMISE_SECRET_KEY,
 });
 
 var cardDetails = {
   card: {
-    'name': 'JOHN DOE',
-    'city': 'Bangkok',
-    'postal_code': 10160,
-    'number': '4532156433142865',
+    'name':             'JOHN DOE',
+    'city':             'Bangkok',
+    'postal_code':      10160,
+    'number':           '4532156433142865',
     'expiration_month': 8,
-    'expiration_year': 2022,
+    'expiration_year':  2022,
   },
 };
 
@@ -23,10 +23,13 @@ omise.tokens.create(cardDetails, function(err, token) {
   }
 
   omise.charges.create({
-    'amount':     10000,
-    'currency':   'thb',
-    'return_uir': 'http://example.com',
-    'card':       token.id,
+    amount:     10000,
+    currency:   'thb',
+    return_uir: 'http://example.com',
+    card:       token.id,
+    metadata:   {
+      note:     'test card'
+    }
   }, function(err, charge) {
     if (err) {
       console.log('error', err);
