@@ -9,9 +9,13 @@ yarn.lock
 pids
 *.pid
 *.seed
+.env
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
 # Dependency directory
 node_modules
+.nyc_output
+test.js
+coverage
